@@ -35,12 +35,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   bool _switchState = false;
 
-  void _changeState() {
-    setState(() {
-      _switchState = !_switchState;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,11 +65,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 onChanged: (value) async {
                   try {
                     String status = value ? "on" : "off";
-                    String uri = "http://endpointAddress/api/lights/$status";
+                    String uri = "http://iot.hsy.ir/api/lights/$status";
                     Dio dio = Dio();
-                    final response = await dio.get(uri);
+                    final response = await dio.put(uri);
+                    Map responseBody = response.data;
                     print(response);
-                    _switchState = value;
+                    if (responseBody["success"] == true) {
+                      _switchState = value;
+                    }
                   }
                   catch(ex) {
                     print(ex.toString());

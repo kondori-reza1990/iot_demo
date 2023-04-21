@@ -1,6 +1,7 @@
 # iot_demo
 
-A new Flutter project.
+This is a Demo mobile app for IOT test.
+This Project have a switch and when status change to on or off send a request to server for turn on/off a lamp in a IOT project.
 
 ## Getting Started
 
